@@ -17,8 +17,8 @@ int main() {
   int personID = 1;
   printf("%d", personID);
   struct employee_t joe;
-  joe.firstname = "joe";
-  joe.lastname = "brew";
+//  joe.firstname = "joe";
+//  joe.lastname = "brew";
   joe.income = 1560.50;
 
   return 0;
