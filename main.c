@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 #define MAX_IDS 32
 
@@ -14,12 +15,13 @@ struct employee_t {
 void initialize_employee(struct employee_t *e) {
   // initializing the Emplpoyee pointers
   // allows to access elements
-  
+  static int numEmployees = 0;
+  numEmployee++;
   e->id = 0;
   e->income = 0;
   e->staff = false;
 
-  return;
+  return numEmployees;
 }
 
 int main() {
@@ -33,7 +35,7 @@ int main() {
 
   initialize_employee(&employees[0]);
 
-  free(my_employees);
+  free(employees);
 
   employees = NULL;
 
