@@ -1,9 +1,14 @@
 #include <stdbool.h>
 #include <stdio.h>
-#include <stdlib.h>
+// #include <stdlib.h>
+#include <getopt.h>
+
+#include "common.h"
+#include "file.h"
 
 #define MAX_IDS 32
 
+/*
 struct employee_t {
 
   int id;
@@ -27,9 +32,30 @@ int initialize_employee(struct employee_t *e) {
 
   return numEmployees;
 }
+*/
+int main(int argc, char *argv[]) {
+  char *filepath = NULL;
+  bool newfile = false;
+  int c;
 
-int main() {
+  while ((c = getopt(argc, argv, "nf:")) != -1) {
+    switch (c) {
 
+    case 'n':
+      newfile = true;
+      break;
+    case 'f' filepath = optarg; break;
+
+        case '?':
+      printf("Unknown options -c%c\n", c) break;
+    default:
+      return -1;
+    }
+  }
+  printf("Newfile: %d\n", newfile);
+  printf("Filepath: %s\n", filepath);
+}
+/*
   struct employee_t *employees = malloc(sizeof(struct employee_t));
 
   // Handle allocations
@@ -49,6 +75,7 @@ int main() {
   free(employees);
 
   employees = NULL;
+*/
 
-  return 0;
+return 0;
 }
