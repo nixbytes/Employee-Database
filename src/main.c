@@ -3,7 +3,7 @@
 // #include <stdlib.h>
 #include <getopt.h>
 
-#include "common.h"
+//#include "common.h"
 #include "file.h"
 
 #define MAX_IDS 32
@@ -14,35 +14,12 @@ void print_usage(char *argv[]) {
   printf("\t -f - (required) path to database file\n");
   return 0;
 }
-/*
-struct employee_t {
 
-  int id;
-  char firstname[64];
-  char lastname[64];
-  float income;
-  bool staff;
-};
-
-int initialize_employee(struct employee_t *e) {
-  // initializing the Emplpoyee pointers
-  // allows to access elements
-
-  // Static Memory Allocation
-  static int numEmployees = 0;
-  numEmployees++;
-
-  e->id = numEmployees;
-  e->income = 0;
-  e->staff = false;
-
-  return numEmployees;
-}
-*/
 int main(int argc, char *argv[]) {
   char *filepath = NULL;
   bool newfile = false;
   int c;
+  int dbfd = -1;
 
   while ((c = getopt(argc, argv, "nf:")) != -1) {
     switch (c) {
@@ -68,31 +45,15 @@ int main(int argc, char *argv[]) {
     return 0;
   }
 
+  if (newfile){
+
+    dbfd = create_db_file(filepath);
+
+  }
+  
   printf("Newfile: %d\n", newfile);
   printf("Filepath: %s\n", filepath);
 }
-
-/*
-  struct employee_t *employees = malloc(sizeof(struct employee_t));
-
-  // Handle allocations
-
-  if (employees == NULL) {
-    printf("Allocation Of memory failed\n");
-    return -1;
-  }
-
-  for (int i = 0; i < 4; i++) {
-
-    int id = initialize_employee(&employees[i]);
-    printf("employee id, ID : %d\n", id);
-  }
-  //  initialize_employee(&employees[0]);
-
-  free(employees);
-
-  employees = NULL;
-*/
 
 return 0;
 }
